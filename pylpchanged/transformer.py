@@ -32,7 +32,9 @@ class changed(pylp.Transformer):
 		super().__init__()
 
 		self.dest = dest
+
 		self.enabled = True
+		self.future = None
 
 		self.exe = ThreadPoolExecutor()
 		self.loop = asyncio.get_event_loop()
@@ -53,14 +55,21 @@ class changed(pylp.Transformer):
 				self.dest = stream.transformer.dest
 
 			if self.dest or not self.enabled:
+				self.future = None
 				return
+
+
+	# Function called when the transformer is piped to a stream
+	def piped():
+		if not self.dest:
+			self.future = asyncio.ensure_future(self.wait_for_dest())
 
 
 	# Function called when a file need to be transformed
 	async def transform(self, file):
-		# If no destination was provided: search the destination stream
-		if not self.dest and self.enabled:
-			await self.wait_for_dest()
+		# Wait for the destination stream
+		if self.future:
+			await self.future
 
 		# If the filter is disabled
 		if not self.enabled:
