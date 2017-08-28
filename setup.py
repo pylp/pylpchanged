@@ -26,7 +26,7 @@ setup(
 	python_requires = ">=3.5",
 	classifiers = [
 		"Development Status :: 4 - Beta",
-		"Topic :: Utilities",		
+		"Topic :: Utilities",
 		"Topic :: Software Development :: Build Tools",
 		"Framework :: AsyncIO",
 		"Programming Language :: Python :: 3 :: Only",
