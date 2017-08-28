@@ -13,7 +13,7 @@ Install **pylpchanged** with `pip`:
 
     pip install pylpchanged
 
-If you don't have Python `Scripts` folder in your PATH, you can run also:
+If you don't have Python `Scripts` folder in your PATH you can run also:
 
     python -m pip install pylpchanged
 
@@ -37,7 +37,7 @@ pylp.task('default', lambda:
 Without parameters, **pylpchanged** will wait for the destination stream (i.e. `pylp.dest`)
 to compare the last result with the source files.
 
-For a faster execution, you can pass directly the destination path like this:
+For a faster execution you can pass directly the destination path like this:
 
 ```python
 import pylp
@@ -46,6 +46,21 @@ from pylpchanged import changed
 pylp.task('default', lambda:
     pylp.src('lib/*.py')
       .pipe(changed('build'))
+    # .pipe(another_plugin())
+      .pipe(pylp.dest('build'))
+)
+```
+
+In fact, your can make your task even faster by reading the files after filtering them:
+
+```python
+import pylp
+from pylpchanged import changed
+
+pylp.task('default', lambda:
+    pylp.src('lib/*.py', read=False)
+      .pipe(changed('build'))
+      .pipe(pylp.readnow())
     # .pipe(another_plugin())
       .pipe(pylp.dest('build'))
 )
