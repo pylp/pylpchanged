@@ -1,5 +1,9 @@
 ## Information
 
+[![PyPI](https://img.shields.io/pypi/v/pylpchanged.svg)](https://pypi.org/project/pylpchanged)
+[![PyPI](https://img.shields.io/pypi/format/pylpchanged.svg)]()
+[![PyPI](https://img.shields.io/pypi/pyversions/pylpchanged.svg)]()
+
 **pylpchanged** is a plugin for [Pylp](https://github.com/pylp/pylp) that filter unchanged
 files.
 
